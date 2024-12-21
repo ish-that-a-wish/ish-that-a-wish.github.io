@@ -22,7 +22,7 @@ from
             `;
         }
 
-        window.onload = displayStats;
+        // window.onload = displayStats;
     </script>
 </head>
 <body>
@@ -70,15 +70,11 @@ from
                 `;
             }
 
-            window.onload = function() {
-                displayStats();
-                displayTeamStats();
+            window.onload = async function() {
+                await displayStats();
+                await displayTeamStats();
             };
         </script>
-        <div id="team-stats-container">
-            <!-- Team stats will be displayed here -->
-        </div>
-          
     </div>
 </body>
 </html>
