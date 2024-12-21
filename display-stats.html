@@ -29,6 +29,17 @@ from
     <h1>Statistics</h1>
     <div id="stats-container">
         <!-- Stats will be displayed here -->
+        query {
+            robots(teamId: "26336") {
+              id
+              name
+              capabilities {
+                type
+                score
+              }
+            }
+          }
+          
     </div>
 </body>
 </html>
