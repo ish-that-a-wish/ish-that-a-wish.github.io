@@ -1,0 +1,34 @@
+from
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Stats</title>
+    <script>
+        async function getStats() {
+            // Replace with your actual API endpoint or logic to get stats
+            const response = await fetch('api.ftcscout.org/graphql');
+            const data = await response.json();
+            return data;
+        }
+
+        async function displayStats() {
+            const stats = await getStats();
+            const statsContainer = document.getElementById('stats-container');
+            statsContainer.innerHTML = `
+                <p>Total Users: ${stats.totalUsers}</p>
+                <p>Total Posts: ${stats.totalPosts}</p>
+                <p>Total Comments: ${stats.totalComments}</p>
+            `;
+        }
+
+        window.onload = displayStats;
+    </script>
+</head>
+<body>
+    <h1>Statistics</h1>
+    <div id="stats-container">
+        <!-- Stats will be displayed here -->
+    </div>
+</body>
+</html>
