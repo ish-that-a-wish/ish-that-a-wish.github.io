@@ -29,16 +29,55 @@ from
     <h1>Statistics</h1>
     <div id="stats-container">
         <!-- Stats will be displayed here -->
-        query {
-            robots(teamId: "26336") {
-              id
-              name
-              capabilities {
-                type
-                score
-              }
+        <script>
+            async function getTeamStats() {
+                const response = await fetch('https://api.ftcscout.org/graphql', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query: `
+                            query {
+                                team(number: 26336) {
+                                    name
+                                    location
+                                    awards
+                                    matches {
+                                        matchNumber
+                                        result
+                                    }
+                                }
+                            }
+                        `
+                    })
+                });
+                const data = await response.json();
+                return data.data.team;
             }
-          }
+
+            async function displayTeamStats() {
+                const teamStats = await getTeamStats();
+                const teamStatsContainer = document.getElementById('team-stats-container');
+                teamStatsContainer.innerHTML = `
+                    <h2>Team 26336: ${teamStats.name}</h2>
+                    <p>Location: ${teamStats.location}</p>
+                    <p>Awards: ${teamStats.awards.join(', ')}</p>
+                    <h3>Matches:</h3>
+                    <ul>
+                        ${teamStats.matches.map(match => `<li>Match ${match.matchNumber}: ${match.result}</li>`).join('')}
+                    </ul>
+                `;
+            }
+
+            window.onload = function() {
+                displayStats();
+                displayTeamStats();
+            };
+        </script>
+        <div id="team-stats-container">
+            <!-- Team stats will be displayed here -->
+        </div>
           
     </div>
 </body>
