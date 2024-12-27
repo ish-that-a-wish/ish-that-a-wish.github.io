@@ -1,33 +1,41 @@
-<DOCTYPE html>
-<html>
-  <head>
-    <title>Team Stats</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTC Scout Stats</title>
     <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <h1>Team Stats</h1>
-    <div id="team-stats"></div>
-    <script src="display-stats.js"></script>
-  </body>
-query GetTeamStats($teamId: Int!) {
-    team(id: $teamId) {
-      id
-      team_name
-      robot_name
-      events {
-        event_key
-        name
-        year
-        awards {
-          name
-        }
-        matches {
-          match_number
-          red_score
-          blue_score
-          winning_alliance
-        }
-      }
-    }
-  }
+</head>
+<body>
+    <header>
+        <h1>Team Stats</h1>
+    </header>
+    <main>
+        <section id="team-stats">
+            <h2>Team Statistics</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Team Number</th>
+                        <th>Team Name</th>
+                        <th>Next Meet</th>
+                        <th>npOPR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>26336</td>
+                        <td>Incredibots</td>
+                        <td>Capek Semifinal</td>
+                        <td>118.29</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; Incredibots</p>
+    </footer>
+</body>
 </html>
