@@ -1,80 +1,33 @@
-from
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Stats</title>
-    <script>
-        async function getStats() {
-            // Replace with your actual API endpoint or logic to get stats
-            const response = await fetch('api.ftcscout.org/graphql');
-            const data = await response.json();
-            return data;
+<DOCTYPE html>
+<html>
+  <head>
+    <title>Team Stats</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <h1>Team Stats</h1>
+    <div id="team-stats"></div>
+    <script src="display-stats.js"></script>
+  </body>
+query GetTeamStats($teamId: Int!) {
+    team(id: $teamId) {
+      id
+      team_name
+      robot_name
+      events {
+        event_key
+        name
+        year
+        awards {
+          name
         }
-
-        async function displayStats() {
-            const stats = await getStats();
-            const statsContainer = document.getElementById('stats-container');
-            statsContainer.innerHTML = `
-                <p>Total Users: ${stats.totalUsers}</p>
-                <p>Total Posts: ${stats.totalPosts}</p>
-                <p>Total Comments: ${stats.totalComments}</p>
-            `;
+        matches {
+          match_number
+          red_score
+          blue_score
+          winning_alliance
         }
-
-        // window.onload = displayStats;
-    </script>
-</head>
-<body>
-    <h1>Statistics</h1>
-    <div id="stats-container">
-        <!-- Stats will be displayed here -->
-        <script>
-            async function getTeamStats() {
-                const response = await fetch('https://api.ftcscout.org/graphql', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        query: `
-                            query {
-                                team(number: 26336) {
-                                    name
-                                    location
-                                    awards
-                                    matches {
-                                        matchNumber
-                                        result
-                                    }
-                                }
-                            }
-                        `
-                    })
-                });
-                const data = await response.json();
-                return data.data.team;
-            }
-
-            async function displayTeamStats() {
-                const teamStats = await getTeamStats();
-                const teamStatsContainer = document.getElementById('team-stats-container');
-                teamStatsContainer.innerHTML = `
-                    <h2>Team 26336: ${teamStats.name}</h2>
-                    <p>Location: ${teamStats.location}</p>
-                    <p>Awards: ${teamStats.awards.join(', ')}</p>
-                    <h3>Matches:</h3>
-                    <ul>
-                        ${teamStats.matches.map(match => `<li>Match ${match.matchNumber}: ${match.result}</li>`).join('')}
-                    </ul>
-                `;
-            }
-
-            window.onload = async function() {
-                await displayStats();
-                await displayTeamStats();
-            };
-        </script>
-    </div>
-</body>
+      }
+    }
+  }
 </html>
