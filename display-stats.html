@@ -21,6 +21,40 @@
             line-height: 1.6;
             font-size: 22px;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #D8BFD8;
+            text-align: center;
+        }
+
+        th {
+            background-color: #D8BFD8;
+            color: #4B0082;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F3E5F5;
+        }
+
+        tr:hover td {
+            animation: glow 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+            box-shadow: 0 0 10px #D8BFD8;
+            }
+            to {
+            box-shadow: 0 0 20px #D8BFD8;
+            }
+        }
         .container {
             max-width: 800px;
             margin: auto;
